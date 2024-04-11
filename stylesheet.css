@@ -1,3 +1,5 @@
+
+
 .header,
 .subheader{
     display:flex;
@@ -5,13 +7,10 @@
     justify-content: center;
 }
 
-
-
 .rps-container{
     display:flex;
     padding: 10px;
     justify-content: space-evenly;
-    outline-style: solid;
 }
 .rock,
 .paper,
