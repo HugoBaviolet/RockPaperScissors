@@ -24,7 +24,18 @@
 }
 .rock:hover,
 .paper:hover,
-.scissors:hover {
+.scissors:hover,
+.clicked {
     background-color:azure
+}
+
+.dialog,
+.player-wins,
+.computer-wins,
+.ties{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
 }
 

@@ -17,18 +17,39 @@
         <h3>Make your move!</h3>
       </div>
       <div class="rps-container">
-        <div class="rock">
-          <img src="rock.png" />
+        <div
+          class="rock"
+          onclick="toggleColor(this); confirmChoice('scissors');"
+        >
+          <img src="rock.png" alt="Rock" />
           <p>rock</p>
         </div>
-        <div class="paper">
-          <img src="paper.png" />
+        <div
+          class="paper"
+          onclick="toggleColor(this); confirmChoice('scissors');"
+        >
+          <img src="paper.png" alt="Paper" />
           <p>paper</p>
         </div>
-        <div class="scissors">
-          <img src="scissors.png" />
+        <div
+          class="scissors"
+          onclick="toggleColor(this); confirmChoice('scissors');"
+        >
+          <img src="scissors.png" alt="Scissors" />
           <p>scissors</p>
         </div>
+      </div>
+      <div class="dialog">
+        <p>X beats Y Player wins</p>
+      </div>
+      <div class="player-wins">
+        <p>Player Score:</p>
+      </div>
+      <div class="computer-wins">
+        <p>Computer Score:</p>
+      </div>
+      <div class="ties">
+        <p>Ties:</p>
       </div>
     </div>
   </body>

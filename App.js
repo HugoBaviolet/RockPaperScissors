@@ -61,5 +61,14 @@ function playGame() {
   console.log("Computer wins: " + computerWins);
   console.log("Draws: " + draws);
 }
+function toggleColor(element) {
+  element.classList.toggle("clicked");
+}
 
+//place holder
+function confirmChoice(choice) {
+  // Use the choice parameter to confirm the player's decision
+  confirm("You selected " + choice + ". Are you sure?");
+  // You can add further logic here based on the player's choice
+}
 playGame();
