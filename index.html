@@ -1,3 +1,4 @@
+<!-- HTML file -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,30 +18,18 @@
         <h3>Make your move!</h3>
       </div>
       <div class="rps-container">
-        <div
-          class="rock"
-          onclick="toggleColor(this); confirmChoice('scissors');"
-        >
+        <div id="rock" class="rock" onclick="makeMove(this);">
           <img src="rock.png" alt="Rock" />
           <p>rock</p>
         </div>
-        <div
-          class="paper"
-          onclick="toggleColor(this); confirmChoice('scissors');"
-        >
+        <div id="paper" class="paper" onclick="makeMove(this);">
           <img src="paper.png" alt="Paper" />
           <p>paper</p>
         </div>
-        <div
-          class="scissors"
-          onclick="toggleColor(this); confirmChoice('scissors');"
-        >
+        <div id="scissors" class="scissors" onclick="makeMove(this);">
           <img src="scissors.png" alt="Scissors" />
           <p>scissors</p>
         </div>
-      </div>
-      <div class="dialog">
-        <p>X beats Y Player wins</p>
       </div>
       <div class="player-wins">
         <p>Player Score:</p>

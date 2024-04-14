@@ -1,74 +1,131 @@
+// Function to get computer's choice
 function getComputerChoice() {
   const arr = ["Rock", "Paper", "Scissors"];
   const randomElement = arr[Math.floor(Math.random() * arr.length)];
   return randomElement.toLowerCase();
 }
 
+// Function to play a single round
 function playRound(playerSelection, computerSelection) {
-  var paper = "paper".toLocaleLowerCase();
-  var rock = "rock".toLocaleLowerCase();
-  var scissors = "scissors".toLocaleLowerCase();
-
-  if (playerSelection == paper && computerSelection == rock) {
-    return "You win, Paper beats rock";
-  } else if (playerSelection == paper && computerSelection == scissors) {
-    return "You lose, Scissors beats paper!";
-  } else if (playerSelection == paper && computerSelection == paper) {
-    return "YOU DRAW";
-  } else if (playerSelection == scissors && computerSelection == paper) {
-    return "You win, Scissors beats Paper";
-  } else if (playerSelection == scissors && computerSelection == rock) {
-    return "You lose, rocks beats scissors";
-  } else if (playerSelection == scissors && computerSelection == scissors) {
-    return "YOU DRAW";
-  } else if (playerSelection == rock && computerSelection == scissors) {
-    return "You win, rock beats scissors";
-  } else if (playerSelection == rock && computerSelection == paper) {
-    return "You lose, paper beats rock!";
-  } else if (playerSelection == rock && computerSelection == rock) {
-    return "YOU DRAW";
+  if (playerSelection === computerSelection) {
+    return "You Draw";
+  } else if (
+    (playerSelection === "paper" && computerSelection === "rock") ||
+    (playerSelection === "rock" && computerSelection === "scissors") ||
+    (playerSelection === "scissors" && computerSelection === "paper")
+  ) {
+    return "You win!";
+  } else {
+    return "You lose!";
   }
 }
 
+// Variables to keep track of scores
 let playerWins = 0;
 let computerWins = 0;
 let draws = 0;
 
 function playGame() {
-  for (let i = 0; i < 5; i++) {
-    const playerSelection = prompt("Please enter something: ").toLowerCase();
-    const computerSelection = getComputerChoice();
-    console.log("Computer: " + computerSelection);
-    console.log("Player 1: " + playerSelection);
-    const result = playRound(playerSelection, computerSelection);
-    console.log(result);
+  let totalRoundsPlayed = 0; // Variable to track total rounds played
+  let playAgain = true; // Variable to control whether to play again
 
-    if (result.includes("win")) {
-      playerWins++;
-    } else if (result.includes("lose")) {
-      computerWins++;
-    } else {
-      draws++;
+  while (playAgain) {
+    // Reset scores before starting a new game
+    playerWins = 0;
+    computerWins = 0;
+    draws = 0;
+
+    for (let i = 0; i < 5; i++) {
+      const computerSelection = getComputerChoice();
+      console.log("Computer: " + computerSelection);
+      const playerSelection = makeMove(); // Player's selection
+      console.log("Player 1: " + playerSelection);
+
+      const result = playRound(playerSelection, computerSelection); // Determine the result of the round
+      alert(result); // Display the result
+
+      // Update scores
+      if (result === "You win!") {
+        playerWins++;
+      } else if (result === "You lose!") {
+        computerWins++;
+      } else {
+        draws++;
+      }
+
+      // Reset clicked images
+      resetClickedImages();
+
+      // Update the results displayed on the screen
+      updateResultsOnScreen();
     }
-    console.log("Player wins: " + playerWins);
-    console.log("Computer wins: " + computerWins);
-    console.log("Draws: " + draws);
-  }
 
-  // Display the final score
-  console.log("FINAL SCORES:-");
-  console.log("Player wins: " + playerWins);
-  console.log("Computer wins: " + computerWins);
-  console.log("Draws: " + draws);
+    // Display final scores and ask to play again
+    alert(
+      "FINAL SCORES:\nPlayer wins: " +
+        playerWins +
+        "\nComputer wins: " +
+        computerWins +
+        "\nDraws: " +
+        draws
+    );
+
+    // Increment total rounds played
+    totalRoundsPlayed += 5;
+
+    // Check if 5 rounds have been played
+    if (totalRoundsPlayed >= 5) {
+      // Ask the user if they want to play again
+      playAgain = confirm("Do you want to play again?");
+      totalRoundsPlayed = 0; // Reset total rounds played if playing again
+    }
+  }
 }
+
+// Function to handle player's move when clicking on an image
+function makeMove(element) {
+  // Toggle color of the clicked element
+  toggleColor(element);
+  // Proceed with the game logic by calling playRound when player makes a choice
+  const playerSelection = element.id; // Get the ID of the clicked element
+  const computerSelection = getComputerChoice(); // Get computer's selection
+  // Determine the result of the round
+  const result = playRound(playerSelection, computerSelection);
+  // Display the result in an alert
+  alert(result);
+  // Update scores based on the result of the round
+  if (result === "You win!") {
+    playerWins++;
+  } else if (result === "You lose!") {
+    computerWins++;
+  } else {
+    draws++;
+  }
+  // Reset clicked images
+  resetClickedImages();
+  // Update the results displayed on the screen
+  updateResultsOnScreen();
+}
+
+// Function to toggle color of the clicked element
 function toggleColor(element) {
   element.classList.toggle("clicked");
 }
 
-//place holder
-function confirmChoice(choice) {
-  // Use the choice parameter to confirm the player's decision
-  confirm("You selected " + choice + ". Are you sure?");
-  // You can add further logic here based on the player's choice
+// Function to reset clicked images
+function resetClickedImages() {
+  const clickedElements = document.querySelectorAll(".clicked");
+  clickedElements.forEach((element) => element.classList.remove("clicked"));
+}
+
+// Function to update results on screen
+function updateResultsOnScreen() {
+  const playerWinsElement = document.querySelector(".player-wins p");
+  const computerWinsElement = document.querySelector(".computer-wins p");
+  const drawsElement = document.querySelector(".ties p");
+
+  playerWinsElement.textContent = "Player Score: " + playerWins;
+  computerWinsElement.textContent = "Computer Score: " + computerWins;
+  drawsElement.textContent = "Ties: " + draws;
 }
 playGame();
