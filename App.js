@@ -37,21 +37,11 @@ function playGame() {
 
     for (let i = 0; i < 5; i++) {
       const computerSelection = getComputerChoice();
-      console.log("Computer: " + computerSelection);
       const playerSelection = makeMove(); // Player's selection
-      console.log("Player 1: " + playerSelection);
-
       const result = playRound(playerSelection, computerSelection); // Determine the result of the round
       alert(result); // Display the result
 
-      // Update scores
-      if (result === "You win!") {
-        playerWins++;
-      } else if (result === "You lose!") {
-        computerWins++;
-      } else {
-        draws++;
-      }
+      // No need to update scores here; it's handled in makeMove()
 
       // Reset clicked images
       resetClickedImages();
@@ -82,6 +72,9 @@ function playGame() {
   }
 }
 
+// Call playGame function to start the game
+playGame();
+
 // Function to handle player's move when clicking on an image
 function makeMove(element) {
   // Toggle color of the clicked element
@@ -101,8 +94,6 @@ function makeMove(element) {
   } else {
     draws++;
   }
-  // Reset clicked images
-  resetClickedImages();
   // Update the results displayed on the screen
   updateResultsOnScreen();
 }
@@ -128,4 +119,3 @@ function updateResultsOnScreen() {
   computerWinsElement.textContent = "Computer Score: " + computerWins;
   drawsElement.textContent = "Ties: " + draws;
 }
-playGame();
